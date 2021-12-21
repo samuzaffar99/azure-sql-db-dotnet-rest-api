@@ -16,25 +16,25 @@ namespace AzureSamples.AzureSQL.Controllers
         public CustomerController(IConfiguration config, ILogger<CustomerController> logger):
             base(config, logger) {}
 
-        [HttpGet("{customerId}")]
+        [HttpGet("/customer/{customerId}")]
         public async Task<JsonElement> Get(int customerId)
         {
             return await this.Query("get", this.GetType(), customerId);
         }
 
-        [HttpPut]
+        [HttpPut("/customer")]
         public async Task<JsonElement> Put([FromBody]JsonElement payload)
         {
             return await this.Query("put", this.GetType(), payload: payload);
         }
 
-        [HttpPatch("{customerId}")]
+        [HttpPatch("/customer/{customerId}")]
         public async Task<JsonElement> Patch([FromBody]JsonElement payload, int customerId)
         {
             return await this.Query("patch", this.GetType(), customerId, payload);
         }
 
-        [HttpDelete("{customerId}")]
+        [HttpDelete("/customer/{customerId}")]
         public async Task<JsonElement> Delete(int customerId)
         {
             return await this.Query("delete", this.GetType(), customerId);

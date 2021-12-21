@@ -33,10 +33,47 @@ namespace AzureSamples.AzureSQL.Controllers
             }
 
             string entityName = entity.Name.Replace("Controller", string.Empty).ToLower();
-            string procedure = $"web.{verb}_{entityName}";
+            string procedure = $"tek.{verb}_{entityName}";
             _logger.LogDebug($"Executing {procedure}");
 
             var connectionStringName = verb.ToLower() != "get" ? "ReadWriteConnection" : "ReadOnlyConnection";
+
+            using(var conn = new SqlConnection(_config.GetConnectionString(connectionStringName))) {
+                DynamicParameters parameters = new DynamicParameters();
+
+                if (payload.ValueKind != default(JsonValueKind))
+                {
+                    var json = JsonSerializer.Serialize(payload);
+                    parameters.Add("Json", json);
+                }
+
+                if (id.HasValue)
+                    parameters.Add("Id", id.Value);
+
+                var qr = await conn.ExecuteScalarAsync<string>(
+                    sql: procedure, 
+                    param: parameters, 
+                    commandType: CommandType.StoredProcedure
+                );
+                
+                if (qr != null)
+                    result = JsonDocument.Parse(qr);
+            };
+
+            if (result == null) 
+                result = JsonDocument.Parse("[]");
+                        
+            return result.RootElement;
+        }
+
+        protected async Task<JsonElement> CustomQuery(string query, int? id = null, JsonElement payload = default(JsonElement))
+        {
+            JsonDocument result = null;
+
+            string procedure = $"tek.{query}";
+            _logger.LogDebug($"Executing {procedure}");
+
+            var connectionStringName = "ReadWriteConnection";
 
             using(var conn = new SqlConnection(_config.GetConnectionString(connectionStringName))) {
                 DynamicParameters parameters = new DynamicParameters();

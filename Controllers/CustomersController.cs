@@ -19,7 +19,17 @@ namespace AzureSamples.AzureSQL.Controllers
         [HttpGet]
         public async Task<JsonElement> Get()
         {
-            return await this.Query("get", this.GetType());
+            return await this.CustomQuery("get_customer", 123);
+           // return await this.Query("get", this.GetType());
         }
+
+        // [HttpGet]   
+        // public IActionResult Get()
+        // {
+        //     return Ok();
+        //     // Task taskA = new Task( () => JsonElement());
+        //     // return await taskA.Run();
+        //     //return await this.Query("get", this.GetType());
+        // }
     }
 }
