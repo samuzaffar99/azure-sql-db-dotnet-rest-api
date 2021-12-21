@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # Make sure these values are correct for your environment
-resourceGroup="dm-api-02"
-appName="dm-api-02"
-location="WestUS2" 
+resourceGroup="shopping"
+appName="tekshop"
+location="germanywestcentral" 
 
 # Change this if you are using your own github repository
 gitSource="https://github.com/Azure-Samples/azure-sql-db-dotnet-rest-api.git"
