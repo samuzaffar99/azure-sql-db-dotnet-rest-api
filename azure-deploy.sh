@@ -8,7 +8,7 @@ appName="tekshop"
 location="germanywestcentral" 
 
 # Change this if you are using your own github repository
-gitSource="https://github.com/Azure-Samples/azure-sql-db-dotnet-rest-api.git"
+gitSource="https://github.com/samuzaffar99/azure-sql-db-dotnet-rest-api"
 
 
 # Azure configuration
