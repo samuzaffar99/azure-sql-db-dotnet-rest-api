@@ -19,8 +19,8 @@ namespace AzureSamples.AzureSQL.Controllers
         [HttpGet]
         public async Task<JsonElement> Get()
         {
-            return await this.CustomQuery("get_customer", 123);
-           // return await this.Query("get", this.GetType());
+            // return await this.CustomQuery("get_customer", 123);
+           return await this.Query("get", this.GetType());
         }
 
         // [HttpGet]   
