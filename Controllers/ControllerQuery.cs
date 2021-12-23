@@ -27,7 +27,7 @@ namespace AzureSamples.AzureSQL.Controllers
         {
             JsonDocument result = null;
 
-            if (!(new string[] {"get", "put", "patch", "delete"}).Contains(verb.ToLower()))
+            if (!(new string[] {"get", "put", "patch", "delete","post"}).Contains(verb.ToLower()))
             {
                 throw new ArgumentException($"verb '{verb}' not supported", nameof(verb));
             }
